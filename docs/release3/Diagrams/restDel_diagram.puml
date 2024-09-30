@@ -1,0 +1,15 @@
+@startuml
+participant "user" as user
+participant "ui" as ui
+participant "rest" as rest
+participant "server" as server 
+
+
+user -> ui: click "Delete"
+ui -> rest: onDelete()
+rest -> server: DELETE
+server -> rest: deleted 
+rest -> ui: deleted
+ui -> ui: updatePostsView()
+ui -> user: "Post was deleted"
+@enduml

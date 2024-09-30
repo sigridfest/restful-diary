@@ -1,0 +1,39 @@
+@startuml
+component core{
+ [diaryProject.core]
+}
+
+component ui{
+  [diaryProject.ui]
+}
+
+component javafx{
+  [fxml]
+}
+
+component rest{
+  [diaryProject.rest]
+}
+
+component json{
+  [diaryProject.json]
+}
+
+component jackson{
+}
+
+component springboot{
+}
+
+diaryProject.rest ..> diaryProject.json
+diaryProject.rest ..> diaryProject.core
+diaryProject.rest ..> jackson
+diaryProject.rest ..> springboot
+diaryProject.json ..> diaryProject.core
+diaryProject.json ..> jackson
+ui ..> javafx
+ui ..> fxml
+diaryProject.ui ..> diaryProject.core
+diaryProject.ui ..> diaryProject.json
+diaryProject.ui ..> diaryProject.rest
+@enduml

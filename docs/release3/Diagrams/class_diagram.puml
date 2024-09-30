@@ -1,0 +1,89 @@
+@startuml
+class Diary {
+  List<Post> posts
+  void addPost(Post)
+  void deletePost(Post)
+  List<Post> searchPost(String)
+}
+
+class Post {
+  LocalDate date
+  String entry
+}
+
+class DiaryService {
+  String PATH
+  DiaryFileHandler diaryFileHandler
+  Diary diary
+  Diary getDiary()
+  Post getPost(LocalDate)
+  boolean addPost(Post)
+  boolean deletePost(LocalDate)
+  void autoSaveDiary()
+}
+
+class DiaryController {
+  String CONTROLLER_PATH
+  DiaryService diaryService
+  Diary getDiary()
+  Post getPost(LocalDate)
+  boolean addPost(Post)
+  boolean deletePost(LocalDate)
+  void autoSaveDiary()
+}
+
+class AppController {
+  Diary diary
+  String fileName
+  void onAdd(ActionEvent)
+  void onDelete()
+  void onSearch()
+  FXMLLoader changeWindow()
+}
+
+class SubmitController {
+  Diary diary
+  String fileName
+  void onBack(ActionEvent)
+  void onSubmit()
+  
+}
+
+class DiaryFileHandler {
+  CustomObjectMapper mapper
+  Path filePath
+  Diary readDiaryFromFile()
+  void writeDiaryToFile(Diary)
+}
+
+class CustomObjectMapper {
+  readValue(Reader, Class)
+  writeValue(Writer, Object)
+}
+
+class DiarySerializer
+class DiaryDeserializer
+
+class PostSerializer
+class PostDeserializer
+
+Diary --> "many" Post
+
+AppController --> "1" DiaryService
+
+SubmitController --> "1" DiaryService
+
+DiaryController --> "1" DiaryService
+
+DiaryService --> "1" DiaryFileHandler
+
+DiaryService --> "1" Diary
+
+DiaryFileHandler --> "1" CustomObjectMapper
+
+CustomObjectMapper --> DiarySerializer
+CustomObjectMapper --> DiaryDeserializer
+
+DiarySerializer --> PostSerializer
+DiaryDeserializer --> PostDeserializer
+@enduml

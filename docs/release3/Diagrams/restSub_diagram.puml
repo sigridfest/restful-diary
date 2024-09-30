@@ -1,0 +1,16 @@
+@startuml
+participant "user" as user
+participant "ui" as ui
+participant "rest" as rest
+participant "server" as server 
+
+
+user -> ui: click "Submit"
+ui -> rest: onSubmit()
+ui -> ui: validation
+rest -> server: POST
+server -> rest: added 
+rest -> ui: added
+ui -> ui: updatePostsView()
+ui -> user: "Post was added"
+@enduml

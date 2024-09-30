@@ -1,0 +1,17 @@
+@startuml
+participant "user" as user
+participant "ui" as ui
+participant "core" as core
+participant "rest" as rest
+participant "server" as server 
+
+
+ui-> ui: updatePostsView()
+ui -> rest: getDiary()
+rest -> core: getPosts()
+core -> rest: posts
+rest -> server: GET
+server -> rest: posts
+rest -> ui: posts 
+ui -> user: updated diary in list view
+@enduml
